@@ -14,7 +14,7 @@ import (
   "crypto/md5"
   "path/filepath"
   "html/template"
-  preseed "github.com/Kiriti29/RedfishProvisioner/utils/preseed"
+  // preseed "github.com/Kiriti29/RedfishProvisioner/utils/preseed"
 )
 
 func CalculateChecksum(file string) string {
