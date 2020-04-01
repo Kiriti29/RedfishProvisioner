@@ -1,7 +1,7 @@
-package redfish
+package github.com/Kiriti29/RedfishProvisioner/preseed
 
 import (
-  "github.com/imroc/req"
+  // "github.com/imroc/req"
   "net/http"
   "fmt"
   "os"
@@ -14,7 +14,7 @@ import (
   "crypto/md5"
   "path/filepath"
   "html/template"
-  // preseed "github.com/Kiriti29/RedfishProvisioner/utils/preseed"
+  //preseed "github.com/redfishProvisioner/utils/preseed"
 )
 
 func CalculateChecksum(file string) string {

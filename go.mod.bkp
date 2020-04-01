@@ -1,0 +1,17 @@
+module redfish
+
+go 1.13
+
+require (
+	github.com/gorilla/mux v1.7.4 // indirect
+	github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79 // indirect
+	github.com/imroc/req v0.3.0
+	github.com/jinzhu/gorm v1.9.12 // indirect
+	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d // indirect
+	golang.org/x/time v0.0.0-20191024005414-555d28b269f0 // indirect
+	gopkg.in/yaml.v2 v2.2.8
+	k8s.io/api v0.17.3
+	k8s.io/apimachinery v0.17.3
+	k8s.io/client-go v0.17.3
+	k8s.io/utils v0.0.0-20200327001022-6496210b90e8 // indirect
+)

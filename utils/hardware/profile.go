@@ -1,4 +1,4 @@
-package hardware
+package github.com/Kiriti29/RedfishProvisioner/hardware
 
 import (
 	"fmt"

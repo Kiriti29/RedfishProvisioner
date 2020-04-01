@@ -1,4 +1,4 @@
-package redfish
+package github.com/Kiriti29/RedfishProvisioner/kubernetes
 
 import (
   "k8s.io/client-go/kubernetes"

@@ -1,4 +1,4 @@
-package preseed
+package github.com/Kiriti29/RedfishProvisioner/preseed
 
 import (
 	"fmt"

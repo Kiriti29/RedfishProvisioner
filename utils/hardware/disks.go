@@ -1,15 +1,15 @@
-package redfish
-
+package github.com/Kiriti29/RedfishProvisioner/hardware
 import (
-    // "github.com/redfishProvisioner/utils/hardware"
-    "github.com/redfishProvisioner/idrac/url_mappings"
+    // hardware "github.com/Kiriti29/RedfishProvisioner/utils/hardware"
+    url_mappings "github.com/Kiriti29/RedfishProvisioner/idrac"
+    "github.com/imroc/req"
   )
 
 type hardwareProfile struct {
     BaseURL string
     hp  []hardware.HardwareProfile
     HttpClient  *req.Req
-    Header 		req.Header
+    Header 	req.Header
     AuthType:   string
     UrlMappings: *url_mappings.UrlMappings
 }

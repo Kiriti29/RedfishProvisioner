@@ -1,12 +1,12 @@
-package redfish
+package main
 
 import (
   "fmt"
-  "github.com/redfishProvisioner/kubernetes/configmaps"
+  configmaps "github.com/Kiriti29/RedfishProvisioner/kubernetes"
   // "github.com/redfishProvisioner/utils/hardware"
 )
 
 func main(){
-    cm := configmaps.New("metal3")
+    cm := configmaps.New("metalkube")
     fmt.Println(cm.Get("mtn52r07c003-config"))
 }

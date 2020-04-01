@@ -1,7 +1,7 @@
-package redfish
+package github.com/Kiriti29/RedfishProvisioner/kubernetes
 
 import (
-  "github.com/redfishProvisioner/kubernetes/base"
+  // "github.com/redfishProvisioner/kubernetes/base"
   batchv1 "k8s.io/api/batch/v1"
 )
 

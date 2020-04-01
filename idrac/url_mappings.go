@@ -1,4 +1,4 @@
-package redfish
+package github.com/Kiriti29/RedfishProvisioner/idrac
 
 type UrlMappings struct{
     BaseURL string
@@ -39,7 +39,7 @@ func (urlmappings UrlMappings) SystemURL(parts string) string {
 }
 
 
-func (urlmappings UrlMappings) ManagerURL(parts ...string) string {
+func (urlmappings UrlMappings) ManagerURL(parts string) string {
 
   if parts == ""{
       return urlmappings.BaseURL + urlmappings.ManagerURL

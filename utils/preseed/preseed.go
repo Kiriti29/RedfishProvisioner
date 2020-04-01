@@ -1,4 +1,4 @@
-package redfish
+package github.com/Kiriti29/RedfishProvisioner/preseed
 
 import (
 	"html/template"
@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"gopkg.in/yaml.v2"
+	// "gopkg.in/yaml.v2"
 	"regexp"
 	"strconv"
 //	"errors"
@@ -43,64 +43,13 @@ func Init(
 		log.Ldate|log.Ltime|log.Lshortfile)
 }
 
-// type FileSystem struct {
-// 	MountPoint   string `yaml:"mountpoint"`
-// 	FsType       string `yaml:"fstype"`
-// 	MountOptions string `yaml:"mount-options"`
-// }
-//
-// type Partitions struct {
-// 	Name       string     `yaml:"disk"`
-// 	Size       string     `yaml:"size"`
-// 	MaxSize    string
-// 	Primary    bool  `yaml:"primary"`
-// 	Bootable   bool       `yaml:"bootable"`
-// 	FileSystem FileSystem `yaml:"filesystem"`
-// }
-//
-// type PhysicalDevice struct {
-// 	Disk       string       `yaml:"disk"`
-// 	Partitions []Partitions `yaml:"partitions"`
-// }
-//
-// type Storage struct {
-// 	PhysicalDevices []PhysicalDevice `yaml:"physical-devices"`
-// 	OSDisk   string
-// 	Hostname string
-// 	NoOfPartitions int
-// }
-//
-// // HardwareProfile sets the hardware raid levels and nics requested by user
-// // on the host.
-// type HostProfile struct {
-// 	Storage Storage `yaml:"storage"`
-// }
-//
-// type Platform struct {
-//         GrubConfig string `yaml:"grub_config"`
-// }
-
 type hostProfile struct {
 		hp	*host.HostProfile
 }
 
-// func (hp *HostProfile) readFromYaml(storageProfileYaml string) (hostProfile *HostProfile, err error) {
-// 	hprofile  :=  HostProfile {}
-//
-// 	if len(storageProfileYaml)  != 0 {
-// 		hprofile.Storage = Storage{ }
-// 		 err = yaml.Unmarshal([]byte(storageProfileYaml), &hprofile.Storage)
-// 	}
-// 	if err != nil{
-// 		Error.Println("Failed to read yaml file")
-// 	}
-// 	return &hprofile, err
-//
-// }
-
 func New(hp string) *hostProfile {
 		hostProf, _ := host.GetHostProfile(hp)
-		return &hostProfile(hp: hostProf)
+		return &hostProfile{hp: hostProf}
 }
 
 func (hp *HostProfile) CreatePreseedfile (hostname string , templatepath string, preeseedpath string) (err error) {
@@ -202,15 +151,3 @@ func (hp *HostProfile) CreateGrubfile(grubfilepath string, grubtemplatepath stri
         return err
 
 }
-
-// func readFromGrubYaml(platformProfileYaml string) ( platform *Platform, err  error) {
-//         platProfile  :=  Platform {}
-//
-//         if len(platformProfileYaml)  != 0 {
-//                 err = yaml.Unmarshal([]byte(platformProfileYaml), &platProfile)
-//         }
-//         if err != nil{
-//                 Error.Println("Failed to read yaml file")
-//         }
-//         return &platProfile, err
-// }

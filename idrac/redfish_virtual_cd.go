@@ -1,3 +1,5 @@
+package github.com/Kiriti29/RedfishProvisioner/idrac
+
 import (
   "fmt"
 	"net/http"
@@ -8,9 +10,9 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"strings"
-	"github.com/metal3-io/baremetal-operator/pkg/bmc"
-  "github.com/redfishProvisioner/utils/hardware/disks"
-  "github.com/redfishProvisioner/utils/preseed/iso"
+	// "github.com/metal3-io/baremetal-operator/pkg/bmc"
+  disks "github.com/Kiriti29/RedfishProvisioner/utils/hardware"
+  preseed "github.com/Kiriti29/RedfishProvisioner/utils/preseed"
 	apiv1 "k8s.io/api/core/v1"
   metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
   // batchv1 "k8s.io/api/batch/v1"
