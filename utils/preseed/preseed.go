@@ -1,4 +1,4 @@
-package github.com/Kiriti29/RedfishProvisioner/preseed
+package preseed
 
 import (
 	"html/template"

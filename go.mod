@@ -3,8 +3,6 @@ module github.com/Kiriti29/RedfishProvisioner/redfish
 go 1.13
 
 require (
-	github.com/Kiriti29/RedfishProvisioner v0.0.0-20200331173809-9f995b8adff1 // indirect
-	github.com/Kiriti29/RedfishProvisioner/utils/preseed v0.0.0-20200331173809-9f995b8adff1 // indirect
 	github.com/imroc/req v0.3.0 // indirect
 	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d // indirect
 	golang.org/x/time v0.0.0-20191024005414-555d28b269f0 // indirect

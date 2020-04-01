@@ -1,4 +1,4 @@
-package github.com/Kiriti29/RedfishProvisioner/hardware
+package hardware
 import (
     // hardware "github.com/Kiriti29/RedfishProvisioner/utils/hardware"
     url_mappings "github.com/Kiriti29/RedfishProvisioner/idrac"

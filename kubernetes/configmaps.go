@@ -1,4 +1,4 @@
-package github.com/Kiriti29/RedfishProvisioner/kubernetes
+package kubernetes
 
 import (
    // base "github.com/RedfishProvisioner/kubernetes/base"

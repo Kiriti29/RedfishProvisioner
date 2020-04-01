@@ -1,4 +1,4 @@
-package github.com/Kiriti29/RedfishProvisioner/idrac
+package idrac
 
 import (
   "fmt"

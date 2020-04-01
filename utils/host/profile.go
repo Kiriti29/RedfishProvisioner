@@ -1,4 +1,4 @@
-package github.com/Kiriti29/RedfishProvisioner/host
+package host
 
 import (
 //  "fmt"
