@@ -1,7 +1,7 @@
 package redfish
 
 import (
-  "github.com/redfishProvisioner/kubernetes/base"
+  // "github.com/redfishProvisioner/kubernetes/base"
    apiv1 "k8s.io/api/core/v1"
 )
 
