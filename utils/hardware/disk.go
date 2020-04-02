@@ -7,6 +7,7 @@ import (
 )
 
 func main(){
-    cm := configmaps.New("metalkube")
-    fmt.Println(cm.Get("mtn52r07c003-config"))
+    cm := configmaps.NewConfigMap("metalkube")
+    label_selector := make(map[string]string)
+    fmt.Println(cm.GetConfigMaps("mtn52r07c003-config", label_selector))
 }

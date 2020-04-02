@@ -2,45 +2,47 @@ package kubernetes
 
 import (
   // "github.com/redfishProvisioner/kubernetes/base"
+  "fmt"
+  metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+  corev1 "k8s.io/client-go/kubernetes/typed/batch/v1"
   batchv1 "k8s.io/api/batch/v1"
 )
 
 type JobClient struct {
-    j *BatchV1Client
+    j corev1.JobInterface
 }
 
-func New(namespace string) *JobClient{
-    clientset = base.New()
-    return &JobClient{
-      j: clientset.BatchV1().Jobs("metalkube")
-    }
+func NewJob(namespace string) *JobClient{
+    clientset := New().kube
+    return &JobClient{j: clientset.BatchV1().Jobs("metalkube")}
 }
 
 func (j *JobClient) CreateJob(job *batchv1.Job) bool {
-    result, _ := j.Create(job)
+    result, _ := j.j.Create(job)
+    status := false
     if result.GetObjectMeta().GetName() != ""{
       for {
-          job, err := jobsClient.Get(result.GetObjectMeta().GetName(), metav1.GetOptions{})
+          job, err := j.j.Get(result.GetObjectMeta().GetName(), metav1.GetOptions{})
           if err != nil {
-              log.Println("Unable to fetch job")
+              fmt.Println("Unable to fetch job")
               break
           }
           if job.Status.Failed > 0 {
-            log.Println("job failed")
+            fmt.Println("job failed")
             break
           }
           if job.Status.Succeeded > 0 {
-            log.Println("job success")
-              break
+            fmt.Println("job success")
+            status = true
+            break
           }
       }
     }
     return status
-  }
 }
 
-func (j *JobClient) DeleteJob(name string, label_selector map[string]string) bool {
-    j.Delete(name)
+func (j *JobClient) DeleteJob(name, label_selector string) bool {
+    _ = j.j.Delete(name, &metav1.DeleteOptions{})
     return true
 }
 

@@ -8,7 +8,7 @@ type Kubernetes struct {
     kube *kubernetes.Clientset
 }
 
-(p *Kubernetes) New() *kubernetes.Clientset{
+func New() *Kubernetes{
     // creates the in-cluster config
     config, err := rest.InClusterConfig()
     if err != nil {
@@ -18,7 +18,5 @@ type Kubernetes struct {
     if err != nil {
       panic(err.Error())
     }
-    return &Kubernetes{
-      kube: clientset
-    }
+    return &Kubernetes{kube: clientset}
 }
