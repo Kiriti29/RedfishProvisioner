@@ -3,7 +3,7 @@ package hardware
 import (
     // hardware "github.com/Kiriti29/RedfishProvisioner/utils/hardware"
     rp "github.com/Kiriti29/RedfishProvisioner"
-    url_mappings "github.com/Kiriti29/RedfishProvisioner/urls/urls_idrac"
+    url_mappings "github.com/Kiriti29/RedfishProvisioner/urls/idrac"
     "github.com/imroc/req"
   )
 

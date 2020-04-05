@@ -3,9 +3,9 @@ module github.com/Kiriti29/RedfishProvisioner
 go 1.13
 
 require (
-	github.com/Kiriti29/RedfishProvisioner/kubernetes master
-	github.com/Kiriti29/RedfishProvisioner/utils/hardware master
-	github.com/Kiriti29/RedfishProvisioner/utils/preseed master
+	github.com/Kiriti29/RedfishProvisioner/kubernetes v0.0.0-20200405132034-7da0b49dacc4
+	github.com/Kiriti29/RedfishProvisioner/utils/hardware v0.0.0-20200405132034-7da0b49dacc4
+	github.com/Kiriti29/RedfishProvisioner/utils/preseed v0.0.0-20200405132034-7da0b49dacc4
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b // indirect
