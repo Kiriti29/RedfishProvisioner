@@ -443,14 +443,3 @@ func (redfishClient *rp.RedfishClient)  GetUniqueNodeId(hostname string) (string
     h.Write([]byte(strings.ToLower(hostname)))
     return hex.EncodeToString(h.Sum(nil))
 }
-
-func CheckErrorAndReturn(res *req.Resp, err error) (*req.Resp) {
-
-	//fmt.Println(res)
-	if err != nil {
-		//log.Fatal(err)
-		fmt.Println(err)
-	}
-
-	return res
-}

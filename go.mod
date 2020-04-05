@@ -4,6 +4,7 @@ go 1.13
 
 require (
 	github.com/Kiriti29/RedfishProvisioner/kubernetes v0.0.0-20200405132034-7da0b49dacc4
+	github.com/Kiriti29/RedfishProvisioner/urls/idrac v0.0.0-20200405134927-060edd2c6a22 // indirect
 	github.com/Kiriti29/RedfishProvisioner/utils/hardware v0.0.0-20200405132034-7da0b49dacc4
 	github.com/Kiriti29/RedfishProvisioner/utils/preseed v0.0.0-20200405132034-7da0b49dacc4
 	github.com/ghodss/yaml v1.0.0 // indirect

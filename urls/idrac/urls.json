@@ -1,0 +1,8 @@
+{
+  "Manager": {
+    "get_virtual_media": "/VirtualMedia/CD"
+  },
+  "System": {
+    "get_virtual_disks": "/Storage/RAID.Slot.6-1/Volumes"
+  }
+}

@@ -33,10 +33,9 @@ func (c *ConfigMapClient) DeleteConfigMap(name, label_selector string) bool {
     return true
 }
 
-func (c *ConfigMapClient) GetConfigMaps(name string, label_selector map[string]string) bool {
+func (c *ConfigMapClient) GetConfigMaps(name string, label_selector map[string]string) *apiv1.ConfigMap {
   result, _ := c.c.Get(name, metav1.GetOptions{})
-  fmt.Println(result)
-  return true
+  return result
 }
 
 func (c *ConfigMapClient) GetConfigMapDetails(name string) bool {

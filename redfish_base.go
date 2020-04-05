@@ -1,7 +1,7 @@
 package redfish
 
 import (
-  //"fmt"
+  "fmt"
   "strings"
 	"net/http"
 	"github.com/imroc/req"
@@ -63,6 +63,17 @@ func (redfishClient *RedfishClient) SetHeader(key string, value string) (req.Hea
 	}
 	redfishClient.Header[key] = value
 	return redfishClient.Header
+}
+
+func CheckErrorAndReturn(res *req.Resp, err error) (*req.Resp) {
+
+	//fmt.Println(res)
+	if err != nil {
+		//log.Fatal(err)
+		fmt.Println(err)
+	}
+
+	return res
 }
 
 type RedfishBase interface{

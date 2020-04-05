@@ -1,26 +1,38 @@
 package idrac
 
+import (
+  "fmt"
+  "encoding/json"
+  "io/ioutil"
+  "os"
+)
+
 type UrlMappings struct{
     BaseURL string
     ManagerBaseURL  string
     SystemBaseURL string
+    Mappings  Mapping
 }
 
-
-mappings := {
-  "Manager": {
-      "get_virtual_media": "/VirtualMedia/CD"
-  },
-  "System": {
-      "get_virtual_disks": "/Storage/RAID.Slot.6-1/Volumes"
-  }
+type Mapping struct {
+  Manager map[string]string
+  System  map[string]string
 }
 
 func New(url string) *UrlMappings{
+  jsonFile, err := os.Open("urls.json")
+  if err != nil {
+    fmt.Println(err)
+  }
+  defer jsonFile.Close()
+  byteValue, _ := ioutil.ReadAll(jsonFile)
+  var maps Mapping
+  json.Unmarshal([]byte(byteValue), &maps)
   return &UrlMappings{
     BaseURL: url,
     ManagerBaseURL: "/Managers/iDRAC.Embedded.1",
-    SystemBaseURL: "/Systems/System.Embedded.1"
+    SystemBaseURL: "/Systems/System.Embedded.1",
+    Mappings: maps,
   }
 }
 
@@ -31,10 +43,10 @@ func New(url string) *UrlMappings{
 func (urlmappings UrlMappings) SystemURL(parts string) string {
 
   if parts == ""{
-      return urlmappings.BaseURL + urlmappings.SystemURL
+      return urlmappings.BaseURL + urlmappings.SystemBaseURL
   } else {
 
-	return urlmappings.BaseURL + urlmappings.ManagerBaseURL + mappings["Manager"][parts]
+	return urlmappings.BaseURL + urlmappings.SystemBaseURL + urlmappings.Mappings.Manager[parts]
   }
 }
 
@@ -42,8 +54,8 @@ func (urlmappings UrlMappings) SystemURL(parts string) string {
 func (urlmappings UrlMappings) ManagerURL(parts string) string {
 
   if parts == ""{
-      return urlmappings.BaseURL + urlmappings.ManagerURL
+      return urlmappings.BaseURL + urlmappings.ManagerBaseURL
   } else {
-	return urlmappings.BaseURL + urlmappings.SystemBaseURL + mappings["System"][parts]
+	return urlmappings.BaseURL + urlmappings.ManagerBaseURL + urlmappings.Mappings.System[parts]
   }
 }

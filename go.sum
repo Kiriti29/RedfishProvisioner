@@ -2,6 +2,9 @@ cloud.google.com/go v0.34.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMT
 github.com/Kiriti29/RedfishProvisioner/kubernetes v0.0.0-20200405132034-7da0b49dacc4 h1:vztbKIUD5OlN4yvs6VkaonSkIbcSwEoK2A4MZDMX8zQ=
 github.com/Kiriti29/RedfishProvisioner/kubernetes v0.0.0-20200405132034-7da0b49dacc4/go.mod h1:J4bPmGYwmtdFRyzGYzd8wV+Q8UaqXTOQ3VIxrhdBYbg=
 github.com/Kiriti29/RedfishProvisioner/urls v0.0.0-20200405132034-7da0b49dacc4 h1:+Qd/vBjuQji43wvw5O4c4dJWQh7R5iqyyOJW0ThR+t8=
+github.com/Kiriti29/RedfishProvisioner/urls v0.0.0-20200405134927-060edd2c6a22 h1:lVRdhVrVImUrYTDc8zFyQQ83SxLl5SkX7XRbVyQHBQE=
+github.com/Kiriti29/RedfishProvisioner/urls/idrac v0.0.0-20200405134927-060edd2c6a22 h1:hAyzUmnFbmE09mDvFDPXIX3HaNQntdo+pA4zpnM2Y8s=
+github.com/Kiriti29/RedfishProvisioner/urls/idrac v0.0.0-20200405134927-060edd2c6a22/go.mod h1:HGcw7klWkLaTe6iN/YKQraIUVxeAa/s1iPwMUVzxw3E=
 github.com/Kiriti29/RedfishProvisioner/utils/hardware v0.0.0-20200405132034-7da0b49dacc4 h1:cSKSTvXqx6DKp2ahgG8iPVjLyMKbYOnLPqpTyE5J9zA=
 github.com/Kiriti29/RedfishProvisioner/utils/hardware v0.0.0-20200405132034-7da0b49dacc4/go.mod h1:XI/nI1fybWTUtwkdbKda4y7Ox7xAca1+hk+GoUxdM8k=
 github.com/Kiriti29/RedfishProvisioner/utils/preseed v0.0.0-20200405132034-7da0b49dacc4/go.mod h1:DCPWj1q9IcjmA1gugPIQ0BIJa40h+SAFT1HKr1aqXrw=

@@ -1,7 +1,7 @@
 package hardware
 
 import (
-	"fmt"
+	// "fmt"
 	"gopkg.in/yaml.v2"
 )
 
