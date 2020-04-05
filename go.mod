@@ -3,9 +3,9 @@ module github.com/Kiriti29/RedfishProvisioner
 go 1.13
 
 require (
-	github.com/Kiriti29/RedfishProvisioner/kubernetes v0.0.0-20200401130357-ae5c4ad47446 // indirect
-	github.com/Kiriti29/RedfishProvisioner/utils/hardware v0.0.0-20200402095958-c57f8a155940
-	github.com/Kiriti29/RedfishProvisioner/utils/preseed v0.0.0-20200402095958-c57f8a155940
+	github.com/Kiriti29/RedfishProvisioner/kubernetes master
+	github.com/Kiriti29/RedfishProvisioner/utils/hardware master
+	github.com/Kiriti29/RedfishProvisioner/utils/preseed master
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b // indirect
@@ -19,6 +19,7 @@ require (
 	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d // indirect
 	golang.org/x/time v0.0.0-20191024005414-555d28b269f0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
+	gopkg.in/yaml.v2 v2.2.8 // indirect
 	k8s.io/api v0.0.0-20181126151915-b503174bad59
 	k8s.io/apiextensions-apiserver v0.0.0-20181126155829-0cd23ebeb688
 	k8s.io/apimachinery v0.0.0-20181126123746-eddba98df674
