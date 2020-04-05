@@ -5,8 +5,12 @@ github.com/Kiriti29/RedfishProvisioner v0.0.0-20200401123942-7d202330cb32 h1:kJj
 github.com/Kiriti29/RedfishProvisioner v0.0.0-20200401130357-ae5c4ad47446 h1:ljLot2YfDWMqBt2f7e2R+JTOuzo4EwWel40X55AmzNY=
 github.com/Kiriti29/RedfishProvisioner/kubernetes v0.0.0-20200401130357-ae5c4ad47446 h1:KhsNHhCRpqgabk5Cz/uiz5Z9zBkEfLb4yxB14va28eE=
 github.com/Kiriti29/RedfishProvisioner/kubernetes v0.0.0-20200401130357-ae5c4ad47446/go.mod h1:J4bPmGYwmtdFRyzGYzd8wV+Q8UaqXTOQ3VIxrhdBYbg=
+github.com/Kiriti29/RedfishProvisioner/utils/hardware v0.0.0-20200402095958-c57f8a155940 h1:kTnATrEZPKcN7aLnfisxduPFmUb4Cm3P26488WFTT8M=
+github.com/Kiriti29/RedfishProvisioner/utils/hardware v0.0.0-20200402095958-c57f8a155940/go.mod h1:XI/nI1fybWTUtwkdbKda4y7Ox7xAca1+hk+GoUxdM8k=
 github.com/Kiriti29/RedfishProvisioner/utils/preseed v0.0.0-20200331173809-9f995b8adff1 h1:o0ewT9mnyQS5+7BqaqkjvX/TrkGp0PBDWxlMPFLjlEk=
 github.com/Kiriti29/RedfishProvisioner/utils/preseed v0.0.0-20200331173809-9f995b8adff1/go.mod h1:DCPWj1q9IcjmA1gugPIQ0BIJa40h+SAFT1HKr1aqXrw=
+github.com/Kiriti29/RedfishProvisioner/utils/preseed v0.0.0-20200402095958-c57f8a155940 h1:ylqCoq3PXgeAaVt4On+/Rih9mA6hFvlfIVD94Gf/DtM=
+github.com/Kiriti29/RedfishProvisioner/utils/preseed v0.0.0-20200402095958-c57f8a155940/go.mod h1:kG3IHog+qX2dOvHIv8cLNjyOlwQLKPpjnQ+OY7Pf9nw=
 github.com/NYTimes/gziphandler v0.0.0-20170623195520-56545f4a5d46/go.mod h1:3wb06e3pkSAbeQ52E9H9iFoQsEEwGN64994WTCIhntQ=
 github.com/PuerkitoBio/purell v1.0.0/go.mod h1:c11w/QuzBsJSee3cPx9rAFu61PvFxuPbtSwDGJws/X0=
 github.com/PuerkitoBio/urlesc v0.0.0-20160726150825-5bd2802263f2/go.mod h1:uGdkoq3SwY9Y+13GIhn11/XLaGBb4BfwItxLd5jeuXE=
@@ -62,6 +66,7 @@ github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79 h1:+ngKgrYPPJr
 github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79/go.mod h1:FecbI9+v66THATjSRHfNgh1IVFe/9kFxbXtjV0ctIMA=
 github.com/hashicorp/golang-lru v0.5.1/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
 github.com/hpcloud/tail v1.0.0/go.mod h1:ab1qPbhIpdTxEkNHXyeSf5vhxWSCs/tWer42PpOxQnU=
+github.com/imroc/req v0.3.0 h1:3EioagmlSG+z+KySToa+Ylo3pTFZs+jh3Brl7ngU12U=
 github.com/imroc/req v0.3.0/go.mod h1:F+NZ+2EFSo6EFXdeIbpfE9hcC233id70kf0byW97Caw=
 github.com/json-iterator/go v0.0.0-20180612202835-f2b4162afba3/go.mod h1:+SdeFBvtyEkXs7REEP0seUULqWtbJapLOCVDaaPEHmU=
 github.com/json-iterator/go v1.1.6/go.mod h1:+SdeFBvtyEkXs7REEP0seUULqWtbJapLOCVDaaPEHmU=

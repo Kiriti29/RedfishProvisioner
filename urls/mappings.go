@@ -1,4 +1,4 @@
-package redfish
+package urls
 
 
 type UrlMappings interface {

@@ -1,20 +1,23 @@
 package hardware
+
 import (
     // hardware "github.com/Kiriti29/RedfishProvisioner/utils/hardware"
-    url_mappings "github.com/Kiriti29/RedfishProvisioner/idrac"
+    rp "github.com/Kiriti29/RedfishProvisioner"
+    url_mappings "github.com/Kiriti29/RedfishProvisioner/urls/urls_idrac"
     "github.com/imroc/req"
   )
 
 type hardwareProfile struct {
-    BaseURL string
-    hp  []hardware.HardwareProfile
-    HttpClient  *req.Req
-    Header 	req.Header
-    AuthType:   string
+    // BaseURL string
+    // hp  []hardware.HardwareProfile
+    // HttpClient  *req.Req
+    // Header 	req.Header
+    // AuthType:   string
+    RedfishClient *rp.RedfishClient
     UrlMappings: *url_mappings.UrlMappings
 }
 
-func New(hp, baseurl string, http_client req.Req, header req.Header) *hardwareProfile {
+func New(hp, rp_client rp.RedfishClient) *hardwareProfile {
     hard_prof := hardware.GetHardwareProfile(hp)
     return &hardwareProfile{
         BaseURL: "url",

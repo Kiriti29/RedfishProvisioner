@@ -1,16 +1,18 @@
-module github.com/Kiriti29/RedfishProvisioner/redfish
+module github.com/Kiriti29/RedfishProvisioner
 
 go 1.13
 
 require (
 	github.com/Kiriti29/RedfishProvisioner/kubernetes v0.0.0-20200401130357-ae5c4ad47446 // indirect
+	github.com/Kiriti29/RedfishProvisioner/utils/hardware v0.0.0-20200402095958-c57f8a155940
+	github.com/Kiriti29/RedfishProvisioner/utils/preseed v0.0.0-20200402095958-c57f8a155940
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b // indirect
 	github.com/google/btree v1.0.0 // indirect
-	github.com/googleapis/gnostic v0.4.1 // indirect
+	github.com/googleapis/gnostic v0.0.0-20170729233727-0c5108395e2d
 	github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79 // indirect
-	github.com/imroc/req v0.3.0 // indirect
+	github.com/imroc/req v0.3.0
 	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/peterbourgon/diskv v2.0.1+incompatible // indirect
 	golang.org/x/crypto v0.0.0-20200323165209-0ec3e9974c59 // indirect

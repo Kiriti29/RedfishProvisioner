@@ -11,6 +11,7 @@ import (
 	"encoding/json"
 	"strings"
 	// "github.com/metal3-io/baremetal-operator/pkg/bmc"
+  rp "github.com/Kiriti29/RedfishProvisioner"
   disks "github.com/Kiriti29/RedfishProvisioner/utils/hardware"
   preseed "github.com/Kiriti29/RedfishProvisioner/utils/preseed"
 	apiv1 "k8s.io/api/core/v1"
@@ -22,131 +23,132 @@ import (
 
 )
 
-type RedfishClient struct {
-	Name 		string
-	AuthType    string
-	BaseURL		string
-	Header 		req.Header
-	HttpClient  *req.Req
-}
-
+// type RedfishClient struct {
+// 	Name 		string
+// 	AuthType    string
+// 	BaseURL		string
+// 	Header 		req.Header
+// 	HttpClient  *req.Req
+// }
+//
 func init(){
 		log.SetPrefix("INFO: ")
 		log.SetFlags(log.Ldate | log.Lmicroseconds | log.Lshortfile)
 }
 
-func New(base_url, username, password string) (RedfishClient) {
-
-	https_base_url := strings.Replace(base_url, "redfish", "https", 1)
-
-	//Initialize Redfish Client
-	redfish_client := RedfishClient {
-		Name:       "RedfishClient",
-		AuthType:   "Basic",
-		BaseURL:    https_base_url
-	}
-	client := GetClient()
-
-	//Set Proper Authorization and Other Headers
-	bmc_username := strings.TrimSuffix(username, "\n")
-	bmc_password := strings.TrimSuffix(password, "\n")
-	b64_encoded_cred := redfish_client.EncodeString(bmc_username + ":" + bmc_password)
-	auth_type := redfish_client.AuthType
-	redfish_client.SetHeader("Authorization", auth_type + " " + b64_encoded_cred)
-	redfish_client.SetHeader("Accept", "application/json")
-	redfish_client.SetHeader("Content-Type","application/json")
-	redfish_client.HttpClient = client
-	return redfish_client
-}
-
-func GetClient() (*req.Req) {
-
-	Req := req.New()
-	trans, _ := Req.Client().Transport.(*http.Transport)
-	trans.MaxIdleConns = 20
-	trans.DisableKeepAlives = true
-	trans.TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
-	return Req
-}
-
-func (redfishClient RedfishClient) EncodeString(data string) (string) {
-
-	return base64.StdEncoding.EncodeToString([]byte(data))
-}
-
-func (redfishClient *RedfishClient) SetHeader(key string, value string) (req.Header) {
-
-	if redfishClient.Header == nil {
-		redfishClient.Header = req.Header{}
-	}
-	redfishClient.Header[key] = value
-	return redfishClient.Header
-}
+//
+// func New(base_url, username, password string) (RedfishClient) {
+//
+// 	https_base_url := strings.Replace(base_url, "redfish", "https", 1)
+//
+// 	//Initialize Redfish Client
+// 	redfish_client := RedfishClient {
+// 		Name:       "RedfishClient",
+// 		AuthType:   "Basic",
+// 		BaseURL:    https_base_url
+// 	}
+// 	client := GetClient()
+//
+// 	//Set Proper Authorization and Other Headers
+// 	bmc_username := strings.TrimSuffix(username, "\n")
+// 	bmc_password := strings.TrimSuffix(password, "\n")
+// 	b64_encoded_cred := redfish_client.EncodeString(bmc_username + ":" + bmc_password)
+// 	auth_type := redfish_client.AuthType
+// 	redfish_client.SetHeader("Authorization", auth_type + " " + b64_encoded_cred)
+// 	redfish_client.SetHeader("Accept", "application/json")
+// 	redfish_client.SetHeader("Content-Type","application/json")
+// 	redfish_client.HttpClient = client
+// 	return redfish_client
+// }
+//
+// func GetClient() (*req.Req) {
+//
+// 	Req := req.New()
+// 	trans, _ := Req.Client().Transport.(*http.Transport)
+// 	trans.MaxIdleConns = 20
+// 	trans.DisableKeepAlives = true
+// 	trans.TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+// 	return Req
+// }
+//
+// func (redfishClient RedfishClient) EncodeString(data string) (string) {
+//
+// 	return base64.StdEncoding.EncodeToString([]byte(data))
+// }
+//
+// func (redfishClient *RedfishClient) SetHeader(key string, value string) (req.Header) {
+//
+// 	if redfishClient.Header == nil {
+// 		redfishClient.Header = req.Header{}
+// 	}
+// 	redfishClient.Header[key] = value
+// 	return redfishClient.Header
+// }
 
 // InspectHardware updates the HardwareDetails field of the host with
 // details of devices discovered on the hardware. It may be called
 // multiple times, and should return true for its dirty flag until the
 // inspection is completed.
-func (p *RedfishClient) InspectHardware() (result provisioner.Result, err error) {
-	p.log.Info("inspecting hardware", "status", p.host.OperationalStatus())
-
-	// The inspection is ongoing. We'll need to check the redfish
-	// status for the server here until it is ready for us to get the
-	// inspection details. Simulate that for now by creating the
-	// hardware details struct as part of a second pass.
-	if p.host.Status.HardwareDetails == nil {
-		p.log.Info("continuing inspection by setting details")
-		p.host.Status.HardwareDetails =
-			&metalkubev1alpha1.HardwareDetails{
-				RAMGiB: 128,
-				NIC: []metalkubev1alpha1.NIC{
-					metalkubev1alpha1.NIC{
-						Name:      "nic-1",
-						Model:     "virt-io",
-						Network:   "Pod Networking",
-						MAC:       "some:mac:address",
-						IP:        "192.168.100.1",
-						SpeedGbps: 1,
-					},
-					metalkubev1alpha1.NIC{
-						Name:      "nic-2",
-						Model:     "e1000",
-						Network:   "Pod Networking",
-						MAC:       "some:other:mac:address",
-						IP:        "192.168.100.2",
-						SpeedGbps: 1,
-					},
-				},
-				Storage: []metalkubev1alpha1.Storage{
-					metalkubev1alpha1.Storage{
-						Name:    "disk-1 (boot)",
-						Type:    "SSD",
-						SizeGiB: 1024 * 93,
-						Model:   "Dell CFJ61",
-					},
-					metalkubev1alpha1.Storage{
-						Name:    "disk-2",
-						Type:    "SSD",
-						SizeGiB: 1024 * 93,
-						Model:   "Dell CFJ61",
-					},
-				},
-				CPUs: []metalkubev1alpha1.CPU{
-					metalkubev1alpha1.CPU{
-						Type:     "x86",
-						SpeedGHz: 3,
-					},
-				},
-			}
-		p.publisher("InspectionComplete", "Hardware inspection completed")
-		result.Dirty = true
-		return result, nil
-	}
-
-	return result, nil
+func (p *rp.RedfishClient) InspectHardware() (err error) {
+// 	log.Info("inspecting hardware", "status", p.host.OperationalStatus())
+//
+// 	// The inspection is ongoing. We'll need to check the redfish
+// 	// status for the server here until it is ready for us to get the
+// 	// inspection details. Simulate that for now by creating the
+// 	// hardware details struct as part of a second pass.
+// 	if p.host.Status.HardwareDetails == nil {
+// 		log.Info("continuing inspection by setting details")
+// 		p.host.Status.HardwareDetails =
+// 			&metalkubev1alpha1.HardwareDetails{
+// 				RAMGiB: 128,
+// 				NIC: []metalkubev1alpha1.NIC{
+// 					metalkubev1alpha1.NIC{
+// 						Name:      "nic-1",
+// 						Model:     "virt-io",
+// 						Network:   "Pod Networking",
+// 						MAC:       "some:mac:address",
+// 						IP:        "192.168.100.1",
+// 						SpeedGbps: 1,
+// 					},
+// 					metalkubev1alpha1.NIC{
+// 						Name:      "nic-2",
+// 						Model:     "e1000",
+// 						Network:   "Pod Networking",
+// 						MAC:       "some:other:mac:address",
+// 						IP:        "192.168.100.2",
+// 						SpeedGbps: 1,
+// 					},
+// 				},
+// 				Storage: []metalkubev1alpha1.Storage{
+// 					metalkubev1alpha1.Storage{
+// 						Name:    "disk-1 (boot)",
+// 						Type:    "SSD",
+// 						SizeGiB: 1024 * 93,
+// 						Model:   "Dell CFJ61",
+// 					},
+// 					metalkubev1alpha1.Storage{
+// 						Name:    "disk-2",
+// 						Type:    "SSD",
+// 						SizeGiB: 1024 * 93,
+// 						Model:   "Dell CFJ61",
+// 					},
+// 				},
+// 				CPUs: []metalkubev1alpha1.CPU{
+// 					metalkubev1alpha1.CPU{
+// 						Type:     "x86",
+// 						SpeedGHz: 3,
+// 					},
+// 				},
+// 			}
+// 		p.publisher("InspectionComplete", "Hardware inspection completed")
+// 		result.Dirty = true
+// 		return result, nil
+// 	}
+//
+	return nil
 }
 
-func (p *RedfishClient) HardwareProfile(hp srting) (result provisioner.Result, err error) {
+func (p *rp.RedfishClient) HardwareProfile(hp srting) (result provisioner.Result, err error) {
     // var result bool = true
     log.Info("Setting RAID Levels")
     // base_url := p.BaseURL
@@ -158,17 +160,17 @@ func (p *RedfishClient) HardwareProfile(hp srting) (result provisioner.Result, e
     return result, nil
 }
 
-func HostProfile(hp, iso_url, iso_checksum srting) (result provisioner.Result, err error) {
+func (p *rp.RedfishClient)HostProfile(hp, iso_url, iso_checksum srting) (result provisioner.Result, err error) {
 
     iso.PrepareISO(iso_url, iso_checksum, hp)
 }
 
-func (p *RedfishClient) Provision(hp provisioner.ISOConfig, getUserData provisioner.UserDataSource) (result provisioner.Result, err error) {
+func (p *rp.RedfishClient) Provision(hp provisioner.ISOConfig, getUserData provisioner.UserDataSource) (result provisioner.Result, err error) {
 
-	  p.log.Info("provisioning image to host", "state", p.host.Status.Provisioning.State)
+	  log.Info("provisioning image to host", "state", p.host.Status.Provisioning.State)
 
 		//result.Dirty = true
-		p.log.Info("Testing Provisioner")
+		log.Info("Testing Provisioner")
 
 		base_url := p.host.Spec.BMC.Address
 
@@ -266,8 +268,8 @@ func (p *RedfishClient) Provision(hp provisioner.ISOConfig, getUserData provisio
 // Deprovision prepares the host to be removed from the cluster. It
 // may be called multiple times, and should return true for its dirty
 // flag until the deprovisioning operation is completed.
-func (p *RedfishClient) Deprovision(deleteIt bool) (result provisioner.Result, err error) {
-	p.log.Info("ensuring host is removed")
+func (p *rp.RedfishClient) Deprovision(deleteIt bool) (result provisioner.Result, err error) {
+	log.Info("ensuring host is removed")
 
 	result.RequeueAfter = deprovisionRequeueDelay
 
@@ -290,14 +292,14 @@ func (p *RedfishClient) Deprovision(deleteIt bool) (result provisioner.Result, e
 
 	if p.host.Status.HardwareDetails != nil {
 		p.publisher("DeprovisionStarted", "Image deprovisioning started")
-		p.log.Info("clearing hardware details")
+		log.Info("clearing hardware details")
 		p.host.Status.HardwareDetails = nil
 		result.Dirty = true
 		return result, nil
 	}
 
 	if p.host.Status.Provisioning.ID != "" {
-		p.log.Info("clearing provisioning id")
+		log.Info("clearing provisioning id")
 		p.host.Status.Provisioning.ID = ""
 		result.Dirty = true
 		return result, nil
@@ -306,12 +308,12 @@ func (p *RedfishClient) Deprovision(deleteIt bool) (result provisioner.Result, e
   _ = rp.DeleteSecret(node_uuid + "-kubeconfig", p.host.Namespace)
 
   if p.host.Spec.SiteProfile.Name != "" {
-       p.log.Info("Clearing site config")
+       log.Info("Clearing site config")
        rp.DeleteSiteConfig(p.host.Spec.SiteProfile.Name, p.host.Spec.SiteProfile.Namespace)
   }
 
   if p.host.Spec.UserData != nil {
-       p.log.Info("Clearing user data")
+       log.Info("Clearing user data")
        rp.DeleteSecret(p.host.Spec.UserData.Name, p.host.Spec.UserData.Namespace)
       }
 
@@ -321,12 +323,12 @@ func (p *RedfishClient) Deprovision(deleteIt bool) (result provisioner.Result, e
 
 // PowerOn ensures the server is powered on independently of any image
 // provisioning operation.
-func (p *RedfishClient) PowerOn() (result provisioner.Result, err error) {
-	p.log.Info("ensuring host is powered on")
+func (p *rp.RedfishClient) PowerOn() (result provisioner.Result, err error) {
+	log.Info("ensuring host is powered on")
 
 	if !p.host.Status.PoweredOn {
 		p.publisher("PowerOn", "Host powered on")
-		p.log.Info("changing status")
+		log.Info("changing status")
 		p.host.Status.PoweredOn = true
 		result.Dirty = true
 		return result, nil
@@ -337,12 +339,12 @@ func (p *RedfishClient) PowerOn() (result provisioner.Result, err error) {
 
 // PowerOff ensures the server is powered off independently of any image
 // provisioning operation.
-func (p *RedfishClient) PowerOff() (result provisioner.Result, err error) {
-	p.log.Info("ensuring host is powered off")
+func (p *rp.RedfishClient) PowerOff() (result provisioner.Result, err error) {
+	log.Info("ensuring host is powered off")
 
 	if p.host.Status.PoweredOn {
 		p.publisher("PowerOff", "Host powered off")
-		p.log.Info("changing status")
+		log.Info("changing status")
 		p.host.Status.PoweredOn = false
 		result.Dirty = true
 		return result, nil
@@ -351,7 +353,7 @@ func (p *RedfishClient) PowerOff() (result provisioner.Result, err error) {
 	return result, nil
 }
 
-func (redfishClient RedfishClient) GetVirtualMediaStatus() (bool) {
+func (redfishClient *rp.RedfishClient) GetVirtualMediaStatus() (bool) {
 
 	endpoint := redfishClient.ManagerURL("VirtualMedia","CD")
 	header := redfishClient.Header
@@ -366,7 +368,7 @@ func (redfishClient RedfishClient) GetVirtualMediaStatus() (bool) {
 	return true
 }
 
-func (redfishClient RedfishClient) InsertISO(image_url string) (bool) {
+func (redfishClient *rp.RedfishClient) InsertISO(image_url string) (bool) {
 	fmt.Printf("Starting ISO attach\n")
 	if redfishClient.GetVirtualMediaStatus() == true {
 		fmt.Printf("Skipping Iso Insert. CD already Attached\n")
@@ -389,7 +391,7 @@ func (redfishClient RedfishClient) InsertISO(image_url string) (bool) {
 }
 
 
-func(redfishClient RedfishClient) SetOneTimeBoot () (bool) {
+func(redfishClient *rp.RedfishClient) SetOneTimeBoot () (bool) {
 		// Actions/Oem/EID_674_Manager.ImportSystemConfiguration
 		fmt.Printf("Setting Onetime boot to VirtualMediaCDROM\n")
 		endpoint := redfishClient.ManagerURL("Actions","Oem", "EID_674_Manager.ImportSystemConfiguration")
@@ -407,7 +409,7 @@ func(redfishClient RedfishClient) SetOneTimeBoot () (bool) {
 
 }
 
-func(redfishClient RedfishClient) Reboot () (bool) {
+func(redfishClient *rp.RedfishClient) Reboot () (bool) {
 	///Systems/System.Embedded.1/Actions/ComputerSystem.Reset
 	fmt.Printf("Starting OS installation. Rebooting the node\n")
 	endpoint := redfishClient.SystemURL("Actions","ComputerSystem.Reset")
@@ -420,7 +422,7 @@ func(redfishClient RedfishClient) Reboot () (bool) {
 }
 
 
-func (redfishClient RedfishClient) EjectISO() (bool) {
+func (redfishClient *rp.RedfishClient) EjectISO() (bool) {
 	fmt.Printf("Starting ISO Eject\n")
 	if redfishClient.GetVirtualMediaStatus() == false {
 		fmt.Printf("No CD to eject\n")
@@ -435,7 +437,7 @@ func (redfishClient RedfishClient) EjectISO() (bool) {
 	return true
 }
 
-func (redfishClient RedfishClient)  GetUniqueNodeId(hostname string) (string) {
+func (redfishClient *rp.RedfishClient)  GetUniqueNodeId(hostname string) (string) {
 
 	h := md5.New()
     h.Write([]byte(strings.ToLower(hostname)))

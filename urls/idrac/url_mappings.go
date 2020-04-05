@@ -1,4 +1,4 @@
-package idrac
+package idrac_urls
 
 type UrlMappings struct{
     BaseURL string
